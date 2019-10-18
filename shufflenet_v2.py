@@ -11,25 +11,6 @@ import torch.nn as nn
 from torch.autograd import Variable
 from torch.nn import init
 
-
-'''
-def g_name(name, m):
-    m.g_name = name
-    return m
-
-class ChannelShuffle(nn.Module):
-    def __init__(self, groups):
-        super(ChannelShuffle, self).__init__()
-        self.groups = groups
-    #Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]
-    def forward(self, x):
-        n, c, h, w = x.size()
-        x =  x.view(n, self.groups, c // self.groups, h, w).permute(0, 2, 1, 3, 4).contiguous().view(n, c, h, w)
-        return x
-
-def channel_shuffle(name, groups):
-    return g_name(name, ChannelShuffle(groups))
-'''
 #Channel shuffle: [N,C,H,W] -> [N,g,C/g,H,W] -> [N,C/g,g,H,w] -> [N,C,H,W]
 def channel_shuffle(x, groups):
     bacth_size, channels, height, width = x.size()
